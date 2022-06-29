@@ -8,6 +8,12 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    protected $maxLoginAttempts = 5;
+    protected $lockoutTime = 300;
+    public function __construct()
+    {
+        $this->middleware('throttle:5,5')->only('login');
+    }
     public function register(Request $request)
     {
         $user = User::where('email', $request->email)->first();
