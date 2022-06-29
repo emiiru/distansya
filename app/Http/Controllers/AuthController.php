@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use App\Mail\UserRegister;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -27,6 +29,10 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        Mail::to($user->email)->queue(new UserRegister($user));
+
+        //$user->delete();
 
         return response()->json([
             'message' => "User successfully registered"
