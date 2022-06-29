@@ -39,8 +39,10 @@ class OrderController extends Controller
         $product->stock = $product->stock - $quantity;
         $product->save();
 
+        $user_id = ($request->user_id ? $request->user_id : $request->user()->id);
+
         $order = Order::create([
-            'user_id' => $request->user()->id,
+            'user_id' => $user_id,
             'product_id' => $product_id,
             'quantity' => $quantity
         ]);

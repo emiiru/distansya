@@ -15,7 +15,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'stock' => $this->faker->numberBetween($min = 0, $max = 100),
+            'stock' => 100,
             'created_at' => now()
         ];
     }
