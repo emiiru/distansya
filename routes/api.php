@@ -19,12 +19,5 @@ use App\Http\Controllers\OrderController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-
 Route::post('/order', [OrderController::class, 'order'])->middleware('auth:sanctum');
 
-//Route::post('/test', [AuthController::class, 'test']);
-Route::post('/test', [AuthController::class, 'test'])->middleware('auth:sanctum');
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
